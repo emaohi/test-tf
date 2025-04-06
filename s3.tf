@@ -1,20 +1,5 @@
 resource "aws_s3_bucket" "example" {
-  # bucket is not encrypted
-  bucket = "untugged"
-}
-
-resource "aws_s3_bucket_replication_configuration" "replication" {
-  depends_on = [aws_s3_bucket_versioning.bad_bucket]
-  role   = aws_iam_role.bad_bucket_replication.arn
-  bucket = aws_s3_bucket.example.id
-  rule {
-    id     = "foobar"
-    status = "Enabled"
-    destination {
-      bucket        = aws_s3_bucket.bad_bucket_destination.arn
-      storage_class = "STANDARD"
-    }
-  }
+  bucket = "example"
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "bad_sse" {
@@ -23,12 +8,12 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "bad_sse" {
   rule {
     apply_server_side_encryption_by_default {
       kms_master_key_id = aws_kms_key.mykey.arn
-      sse_algorithm     = "aws:kms"
+      sse_algorithm     = "BLA"
     }
   }
 }
 
-resource "aws_s3_bucket_acl" "public_read_write_v4" {
+resource "aws_s3_bucket_acl" "bad_acl" {
   bucket = aws_s3_bucket.example.id
-  acl    = "public-read-write"
+  acl    = "private"
 }
