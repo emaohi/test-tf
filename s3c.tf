@@ -11,8 +11,6 @@ resource "aws_s3_bucket_replication_configuration" "replication" {
       prefix = "foo"
     }
 
-    status = "Disabled"
-
     destination {
       bucket        = aws_s3_bucket.destination.arn
       storage_class = "STANDARD"
