@@ -11,7 +11,7 @@ resource "aws_s3_bucket_replication_configuration" "replication" {
       prefix = "foo"
     }
 
-    status = "Disabled"
+    status = "Enabled"
 
     destination {
       bucket        = aws_s3_bucket.destination.arn
